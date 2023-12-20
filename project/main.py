@@ -1,5 +1,6 @@
 import gym
 import gym_maze
+import cv2
 
 # Create an environment
 env = gym.make("maze-random-10x10-plus-v0")
@@ -21,6 +22,8 @@ for episode in range(NUM_EPISODES):
 
     if done or truncated:
         observation = env.reset()
+    cv2.waitKey(200)
+    env.render()
 
 # Close the environment
 env.close()
