@@ -3,7 +3,6 @@ import gym_maze
 import numpy as np
 import cv2
 
-
 alpha = 0.1
 gamma = 0.95
 epsilon = 0.9
@@ -11,7 +10,7 @@ q_table = np.zeros(shape=(10, 10, 4))
 policy = np.zeros(shape=(10, 10))
 
 
-def getReward(state,old_state):
+def getReward(state, old_state):
     if state[0] == 9 and state[1] == 9:
         return 5000
     # elif state[0] == old_state[0] and state[1] == old_state[1] :
@@ -23,6 +22,28 @@ def getAction(actions):
     if np.random.random() < epsilon:
         return np.argmax(actions)
     return np.random.randint(4)
+
+
+def calculatePolicy(env):
+    env.render()
+    state = np.array([0, 0])
+    env.reset()
+
+    for __ in range(1000):
+        action = getAction(q_table[state[0]][state[1]])
+        old_state = state.copy()
+        state, _, done, _ = env.step(action)
+        reward = getReward(state, old_state)
+        old_q_value = q_table[old_state[0]][old_state[1]][action]
+        TD = reward + (gamma * np.max(q_table[state[0]][state[1]]) - old_q_value)
+        q_table[old_state[0]][old_state[1]][action] += alpha * TD
+        if done:
+            env.reset()
+            state = [0, 0]
+
+    for i in range(10):
+        for j in range(10):
+            policy[i][j] = np.argmax(q_table[i][j])
 
 
 if __name__ == "__main__":
