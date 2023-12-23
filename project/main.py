@@ -11,6 +11,12 @@ q_table = np.zeros(shape=(10, 10, 4))
 policy = np.zeros(shape=(10, 10))
 
 
+def getAction(actions):
+    if np.random.random() < epsilon:
+        return np.argmax(actions)
+    return np.random.randint(4)
+
+
 if __name__ == "__main__":
     # Create an environment
     env = gym.make("maze-random-10x10-plus-v0")
