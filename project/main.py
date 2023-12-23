@@ -25,11 +25,10 @@ def getAction(actions):
 
 
 def calculatePolicy(env):
-    env.render()
     state = np.array([0, 0])
     env.reset()
 
-    for __ in range(1000):
+    for __ in range(100000):
         action = getAction(q_table[state[0]][state[1]])
         old_state = state.copy()
         state, _, done, _ = env.step(action)
@@ -70,7 +69,8 @@ if __name__ == "__main__":
 
         if done or truncated:
             observation = env.reset()
-        cv2.waitKey(200)
+            print("GET GOAL!!!")
+        # cv2.waitKey(200)
         env.render()
 
     # Close the environment
