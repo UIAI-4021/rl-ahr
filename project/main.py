@@ -30,7 +30,7 @@ def calculatePolicy(env):
         action = getAction(q_table[state[0]][state[1]])
         old_state = state.copy()
         state, _, done, _ = env.step(action)
-        reward = getReward(state, old_state)
+        reward = getReward(state)
         old_q_value = q_table[old_state[0]][old_state[1]][action]
         TD = reward + (gamma * np.max(q_table[state[0]][state[1]]) - old_q_value)
         q_table[old_state[0]][old_state[1]][action] += alpha * TD
