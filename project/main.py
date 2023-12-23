@@ -51,6 +51,8 @@ if __name__ == "__main__":
     env = gym.make("maze-random-10x10-plus-v0")
     observation = env.reset()
 
+    calculatePolicy(env)
+
     # Define the maximum number of iterations
     NUM_EPISODES = 1000
 
@@ -60,10 +62,11 @@ if __name__ == "__main__":
         # Note: .sample() is used to sample random action from the environment's action space
 
         # Choose an action (Replace this random action with your agent's policy)
-        action = env.action_space.sample()
+        action = policy[int(observation[0])][int(observation[1])]
 
         # Perform the action and receive feedback from the environment
         next_state, reward, done, truncated = env.step(action)
+        observation = next_state
 
         if done or truncated:
             observation = env.reset()
