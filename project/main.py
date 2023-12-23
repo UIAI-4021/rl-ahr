@@ -1,6 +1,15 @@
 import gym
 import gym_maze
+import numpy as np
 import cv2
+
+
+alpha = 0.1
+gamma = 0.95
+epsilon = 0.9
+q_table = np.zeros(shape=(10, 10, 4))
+policy = np.zeros(shape=(10, 10))
+
 
 if __name__ == "__main__":
     # Create an environment
