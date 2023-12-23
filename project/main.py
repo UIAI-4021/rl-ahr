@@ -10,11 +10,9 @@ q_table = np.zeros(shape=(10, 10, 4))
 policy = np.zeros(shape=(10, 10))
 
 
-def getReward(state, old_state):
+def getReward(state):
     if state[0] == 9 and state[1] == 9:
         return 5000
-    # elif state[0] == old_state[0] and state[1] == old_state[1] :
-    #     return -50
     return -1
 
 
