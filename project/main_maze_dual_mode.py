@@ -99,11 +99,12 @@ if __name__ == "__main__":
     # Create an environment
     env = gym.make("maze-random-10x10-plus-v0")
     observation = env.reset()
-
-    calculatePolicy(env)
+    
+    # First policy ( Uncomment to see what happens)
+    #calculatePolicy(env)
 
     # Second policy ( Uncomment to see what happens)
-    #calculatePolicy_second(env)
+    calculatePolicy_second(env)
 
     # Define the maximum number of iterations
     NUM_EPISODES = 1000
@@ -114,10 +115,10 @@ if __name__ == "__main__":
         # Note: .sample() is used to sample random action from the environment's action space
 
         # action based on first policy
-        action = policy[int(observation[0])][int(observation[1])]
+        #action = policy[int(observation[0])][int(observation[1])]
 
         # action based on second Policy
-        #action = second_policy[int(observation[0])][int(observation[1])]
+        action = second_policy[int(observation[0])][int(observation[1])]
 
         # Perform the action and receive feedback from the environment
         next_state, reward, done, truncated = env.step(action)
